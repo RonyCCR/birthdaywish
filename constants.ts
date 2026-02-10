@@ -8,7 +8,7 @@ export const BIRTH_DATE = "09 March, 2003";
  * 2. Rename the image to "profile.jpg".
  * 3. Recommended size: 1080x1080px (1:1 Square ratio).
  */
-export const PROFILE_IMAGE_PATH = "https://github.com/RonyCCR/birthdaywish/blob/db28182ca1670570fcb8ace10dc0a9be196899fc/profile.jpg";
+export const PROFILE_IMAGE_PATH = "./profile.jpg";
 
 export const BANGLA_MESSAGE = [
   "এই বিশেষ দিনে আপনাকে জানাই আন্তরিক শুভেচ্ছা ও শ্রদ্ধাভরা শুভকামনা।",
