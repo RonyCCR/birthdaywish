@@ -7,4 +7,7 @@ export default defineConfig({
   server: {
     port: 3000,
   },
+  resolve: {
+    // Removed @ alias to use standard relative paths which are more reliable in this environment
+  },
 });
