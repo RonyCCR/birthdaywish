@@ -8,7 +8,7 @@ export const BIRTH_DATE = "09 March, 2003";
  * 2. Name it exactly "profile.jpg".
  * 3. Change the constant below to: export const PROFILE_IMAGE_PATH = "./profile.jpg";
  */
-export const PROFILE_IMAGE_PATH = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop";
+export const PROFILE_IMAGE_PATH = "./profile.jpg";
 
 export const BANGLA_MESSAGE = [
   "এই বিশেষ দিনে আপনাকে জানাই আন্তরিক শুভেচ্ছা ও শ্রদ্ধাভরা শুভকামনা।",
