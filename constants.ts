@@ -8,7 +8,7 @@ export const BIRTH_DATE = "09 March, 2003";
  * 2. Name it exactly "profile.jpg".
  * 3. Change the constant below to: export const PROFILE_IMAGE_PATH = "./profile.jpg";
  */
-export const PROFILE_IMAGE_PATH = "./profile.jpg";
+export const PROFILE_IMAGE_PATH = "https://raw.githubusercontent.com/RonyCCR/birthdaywish/f400c0e57263e31b00581f95b3c1c17ca1725561/profile.jpg";
 
 export const BANGLA_MESSAGE = [
   "এই বিশেষ দিনে আপনাকে জানাই আন্তরিক শুভেচ্ছা ও শ্রদ্ধাভরা শুভকামনা।",
