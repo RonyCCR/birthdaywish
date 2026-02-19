@@ -12,7 +12,8 @@ const TypingText: React.FC = () => {
 
     const currentLine = BANGLA_MESSAGE[currentLineIndex];
     const isSpecialChar = currentLine === "\n";
-    const speed = isSpecialChar ? 200 : 35;
+    // Significantly faster typing: 15ms for normal characters, 100ms for newlines
+    const speed = isSpecialChar ? 100 : 15;
 
     const timeout = setTimeout(() => {
       if (currentCharIndex < currentLine.length) {
@@ -27,10 +28,11 @@ const TypingText: React.FC = () => {
             }
         }
         
+        // Faster transition to the next line: 50ms-70ms instead of 100ms-150ms
         setTimeout(() => {
           setCurrentLineIndex(prev => prev + 1);
           setCurrentCharIndex(0);
-        }, isSpecialChar ? 100 : 150);
+        }, isSpecialChar ? 50 : 70);
       }
     }, speed);
 

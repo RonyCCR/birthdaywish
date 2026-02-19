@@ -59,27 +59,28 @@ const BirthdayReveal: React.FC = () => {
     // --- 3. PROFILE IMAGE SECTION ---
     try {
       const img = new Image();
-      // Important: crossOrigin is required to download the canvas when using external URLs
-      img.crossOrigin = "anonymous";
+      // FIX: Only set crossOrigin for external URLs. 
+      // Local repo paths (like ./profile.jpg) must NOT have crossOrigin set to load correctly in some environments.
+      if (PROFILE_IMAGE_PATH.startsWith('http')) {
+        img.crossOrigin = "anonymous";
+      }
+      
       img.src = PROFILE_IMAGE_PATH;
       
       await new Promise((resolve) => {
         img.onload = resolve;
         img.onerror = () => {
-          // Robust fallback if image path is broken
           img.src = `https://api.dicebear.com/7.x/initials/png?seed=${getInitials()}&backgroundColor=020617&fontSize=40&bold=true`;
           img.onload = resolve;
         };
       });
 
-      // Draw Gold Ring
       ctx.strokeStyle = '#D4AF37';
       ctx.lineWidth = 6;
       ctx.beginPath();
       ctx.arc(540, 360, 235, 0, Math.PI * 2);
       ctx.stroke();
 
-      // Mask and Draw Image
       ctx.save();
       ctx.beginPath();
       ctx.arc(540, 360, 225, 0, Math.PI * 2);
@@ -88,7 +89,6 @@ const BirthdayReveal: React.FC = () => {
       const aspect = img.width / img.height;
       let drawW, drawH, drawX, drawY;
       
-      // Object-fit: cover logic for canvas
       if (aspect > 1) {
         drawH = 450;
         drawW = 450 * aspect;
@@ -104,32 +104,29 @@ const BirthdayReveal: React.FC = () => {
       ctx.drawImage(img, drawX, drawY, drawW, drawH);
       ctx.restore();
     } catch (e) {
-      console.error("Poster profile image failed", e);
+      console.error("Poster generation failed", e);
     }
 
-    // --- 4. TYPOGRAPHY ---
+    // --- 4. TYPOGRAPHY (Lite Style) ---
     ctx.textAlign = 'center';
     
-    // Happy Birthday (Smaller, Normal Weight / 'Lite')
+    // Happy Birthday (Weight 400 - Lite)
     ctx.fillStyle = '#D4AF37';
-    ctx.font = 'italic 400 54px "Playfair Display", serif';
+    ctx.font = 'italic 400 52px "Playfair Display", serif';
     ctx.fillText('Happy Birthday', 540, 720);
 
-    // Name (Bigger, Bold)
+    // Name
     ctx.fillStyle = '#FFFFFF';
     ctx.font = '700 85px "Anek Bangla", sans-serif';
     ctx.fillText(BIRTHDAY_NAME, 540, 835);
 
-    // Separator line
     ctx.fillStyle = 'rgba(212, 175, 55, 0.2)';
     ctx.fillRect(470, 870, 140, 1.5);
 
-    // Date
     ctx.fillStyle = 'rgba(255, 255, 255, 0.4)';
     ctx.font = '400 34px "Hind Siliguri", sans-serif';
     ctx.fillText(BIRTH_DATE.toUpperCase(), 540, 935);
 
-    // Credits
     ctx.fillStyle = 'rgba(212, 175, 55, 0.5)';
     ctx.font = '600 18px sans-serif';
     ctx.fillText(`BEST WISHES | RAKIBUL HASAN RONY`, 540, 1035);
@@ -145,7 +142,6 @@ const BirthdayReveal: React.FC = () => {
 
   return (
     <div className="relative min-h-screen w-full flex flex-col items-center px-6 pt-16 pb-20 overflow-y-auto bg-[#020617] selection:bg-amber-500/20">
-      {/* Save Button */}
       <button 
         onClick={generateCard}
         disabled={isGenerating}
@@ -159,19 +155,18 @@ const BirthdayReveal: React.FC = () => {
             <svg xmlns="http://www.w3.org/2000/svg" className="w-4 h-4 text-amber-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="7 10 12 15 17 10"/><line x1="12" y1="15" x2="12" y2="3"/>
             </svg>
-            <span className="hidden md:inline text-[8px] font-black text-amber-500/80 tracking-[0.2em] uppercase">Save Poster</span>
+            <span className="hidden md:inline text-[9px] font-bold text-amber-500/60 tracking-[0.2em] uppercase">Poster</span>
           </div>
         )}
       </button>
 
-      {/* Decorative Background Photo */}
       <div 
-        className={`fixed inset-0 z-0 transition-opacity duration-[3000ms] ease-out pointer-events-none ${isLoaded ? 'opacity-55' : 'opacity-0'}`}
+        className={`fixed inset-0 z-0 transition-opacity duration-[3000ms] ease-out pointer-events-none ${isLoaded ? 'opacity-40' : 'opacity-0'}`}
         style={{
           backgroundImage: 'url("https://images.unsplash.com/photo-1513151233558-d860c5398176?q=80&w=2000&auto=format&fit=crop")',
           backgroundSize: 'cover',
           backgroundPosition: 'center',
-          filter: 'brightness(0.6) saturate(0.8)'
+          filter: 'brightness(0.5) saturate(0.7)'
         }}
       />
       
@@ -180,7 +175,7 @@ const BirthdayReveal: React.FC = () => {
       <div className="relative z-10 flex flex-col items-center w-full max-w-2xl">
         {/* Profile Section */}
         <div className="animate-soft-reveal mb-10 group">
-          <div className="relative p-1 rounded-full bg-gradient-to-tr from-amber-600/30 via-white/10 to-amber-600/30 shadow-[0_0_40px_rgba(212,175,55,0.2)]">
+          <div className="relative p-1 rounded-full bg-gradient-to-tr from-amber-600/30 via-white/10 to-amber-600/30 shadow-[0_0_40px_rgba(212,175,55,0.15)]">
             <div className="w-40 h-40 md:w-48 md:h-48 rounded-full border border-white/5 overflow-hidden bg-slate-900 shadow-2xl relative">
               <img 
                 src={PROFILE_IMAGE_PATH} 
@@ -188,17 +183,19 @@ const BirthdayReveal: React.FC = () => {
                 className="w-full h-full object-cover transition-transform duration-[15000ms] group-hover:scale-110"
                 loading="eager"
                 onError={(e) => {
-                  (e.target as HTMLImageElement).src = `https://api.dicebear.com/7.x/initials/svg?seed=${getInitials()}&backgroundColor=020617&fontFamily=Playfair%20Display&bold=true`;
+                  const target = e.target as HTMLImageElement;
+                  if (!target.src.includes('dicebear')) {
+                    target.src = `https://api.dicebear.com/7.x/initials/svg?seed=${getInitials()}&backgroundColor=020617&fontFamily=Playfair%20Display&bold=true`;
+                  }
                 }}
               />
               <div className="absolute inset-0 rounded-full shadow-[inset_0_0_30px_rgba(0,0,0,0.5)] pointer-events-none"></div>
             </div>
-            {/* Spinning decorative ring */}
             <div className="absolute inset-[-6px] border border-amber-500/10 rounded-full animate-[spin_20s_linear_infinite] opacity-30"></div>
           </div>
         </div>
 
-        {/* Typographic Header */}
+        {/* Typographic Header (Lite Style) */}
         <p className="animate-soft-reveal [animation-delay:300ms] font-serif font-normal italic text-amber-500/90 text-2xl md:text-3xl mb-4 tracking-wide text-center">
           Happy Birthday
         </p>
@@ -210,6 +207,7 @@ const BirthdayReveal: React.FC = () => {
         <div className="animate-soft-reveal [animation-delay:700ms] flex items-center gap-4 mb-14">
           <span className="h-[1px] w-6 bg-amber-500/20"></span>
           <p className="font-hind text-xs md:text-sm text-amber-100/60 font-medium tracking-[0.4em] uppercase">
+            {/* Fixed typo: BIR_DATE was changed to BIRTH_DATE */}
             {BIRTH_DATE}
           </p>
           <span className="h-[1px] w-6 bg-amber-500/20"></span>

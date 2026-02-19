@@ -8,7 +8,36 @@ export const BIRTH_DATE = "09 March, 2003";
  * 2. Name it exactly "profile.jpg".
  * 3. Change the constant below to: export const PROFILE_IMAGE_PATH = "./profile.jpg";
  */
-export const PROFILE_IMAGE_PATH = "https://raw.githubusercontent.com/RonyCCR/birthdaywish/f400c0e57263e31b00581f95b3c1c17ca1725561/profile.jpg";
+export const PROFILE_IMAGE_PATH = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop";
+
+export const TIMER_DURATION = 23;
+
+export const TIMER_MESSAGES = [
+  "শুভ জন্মদিন!", // 0
+  "একদম কাছে...", // 1
+  "চোখ বন্ধ করুন", // 2
+  "ম্যাজিক শুরু হচ্ছে", // 3
+  "নতুন স্বপ্নের শুরু", // 4
+  "অপেক্ষা প্রায় শেষ", // 5
+  "Just a moment...", // 6
+  "আপনার জন্য সারপ্রাইজ", // 7
+  "ভালোবাসার উপহার", // 8
+  "সবাই তৈরি তো?", // 9
+  "উত্তেজনা বাড়ছে!", // 10
+  "A special journey", // 11
+  "একটু ধৈর্য ধরুন", // 12
+  "সবকিছু সুন্দর হচ্ছে", // 13
+  "স্মৃতিময় মুহূর্ত", // 14
+  "Feeling the joy", // 15
+  "স্বপ্ন সত্যি হোক", // 16
+  "হাসি থাকুক সারাক্ষণ", // 17
+  "দিনটি আপনার হোক", // 18
+  "Something magical", // 19
+  "শুভেচ্ছা আপনার জন্য", // 20
+  "তৈরি থাকুন...", // 21
+  "অপেক্ষা শুরু...", // 22
+  "যাত্রা শুরু হোক"  // 23
+];
 
 export const BANGLA_MESSAGE = [
   "এই বিশেষ দিনে আপনাকে জানাই আন্তরিক শুভেচ্ছা ও শ্রদ্ধাভরা শুভকামনা।",
