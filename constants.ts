@@ -4,12 +4,11 @@ export const BIRTH_DATE = "09 March, 2003";
 
 /**
  * IMAGE UPLOAD INSTRUCTIONS:
- * 1. Ensure your image is named exactly "profile.jpg".
- * 2. It must be in the root directory (same folder as this file).
- * 
- * Using a string path instead of an import to avoid ESM module resolution issues in the browser.
+ * 1. To use your own photo, upload it to the root folder of your project.
+ * 2. Name it exactly "profile.jpg".
+ * 3. Change the constant below to: export const PROFILE_IMAGE_PATH = "./profile.jpg";
  */
-export const PROFILE_IMAGE_PATH = "profile.jpg";
+export const PROFILE_IMAGE_PATH = "https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=1000&auto=format&fit=crop";
 
 export const BANGLA_MESSAGE = [
   "এই বিশেষ দিনে আপনাকে জানাই আন্তরিক শুভেচ্ছা ও শ্রদ্ধাভরা শুভকামনা।",
@@ -19,7 +18,7 @@ export const BANGLA_MESSAGE = [
   "\n",
   "আপনি যেন সবসময় নিজের মূল্য নিজেই বুঝতে পারেন,",
   "নিজের স্বপ্নগুলোকে সম্মানের সাথে বাঁচিয়ে রাখতে পারেন,",
-  "এবং জীবনের পথে চলতে গিয়ে কখনোই নিজের প্রতি বিশ্বাস হারান না।",
+  "এবং জীবনের পথে চলতে গিয়ে কখনোই নিজের প্রতি বিশ্বাস হারান না।",
   "\n",
   "আজকের দিনটি হোক আপনার জন্য একটু বেশি আনন্দের,",
   "একটু বেশি ভালোবাসার,",
